@@ -6647,7 +6647,9 @@ static T* checkNotNull(T* ptr, const char* name, const char* loggers, ...) {
         el::base::debug::CrashHandler elCrashHandler(ELPP_USE_DEF_CRASH_HANDLER);\
     }
 // NOTE: no ELPP_INITI_BASIC_DECLR when sharing - causes double free corruption on external symbols
+// CYLENT CHANGE: Without ELPP_INITI_BASIC_DECLR, s_currentHost and s_currentUser are not defined, causing link errors
 #define SHARE_EASYLOGGINGPP(initializedStorage)\
+	ELPP_INITI_BASIC_DECLR\
     namespace el {\
         namespace base {\
             el::base::type::StoragePointer elStorage(initializedStorage);\
